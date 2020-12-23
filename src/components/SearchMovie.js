@@ -14,7 +14,7 @@ const SearchMovie = ({ getMovies, movies }) => {
 
     useEffect(() => {
         const movieArray = movies ? movies.map(movie => {
-            return (<Movie name={movie.Title} year={movie.Year} key={movie.imdbID} />)
+            return (<Movie name={movie.Title} year={movie.Year} poster={movie.Poster} key={movie.imdbID} />)
         }) : (<p>Loading movies...</p>);
 
         setMovieList(movieArray)
@@ -28,10 +28,20 @@ const SearchMovie = ({ getMovies, movies }) => {
                     <label>Movie title</label>
                     <input type="text" placeholder="Enter movie title" value={movieName} onChange={(e) => setMoviename(e.target.value)} />
                 </form>
+
+
                 <div className="movie-list">
-                    <ul>
-                        {movieList}
-                    </ul>
+                    <div className="results">
+                        <h2>Results for "{movieName}"</h2>
+                        <ul>
+                            {movieList}
+                        </ul>
+                    </div>
+
+                    <div className="nominations">
+                        <h2>Nominations</h2>
+                    </div>
+
                 </div>
             </div>
         </>

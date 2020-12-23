@@ -50,3 +50,29 @@ body {
   height: 50%;
   width: 50%;
 }
+
+label{
+  display: block;
+  margin: 0px auto 10px auto;
+  width: 91%; 
+}
+
+input{
+  display: block;
+  margin: 0px auto 20px auto;
+  width: 90%;
+  height: 40px;
+}
+
+li{
+  list-style-type: none;
+}
+
+.movie-list{
+  display: flex;
+  justify-content: space-between;
+}
+
+.movie-list div{
+width: 45%;
+}
