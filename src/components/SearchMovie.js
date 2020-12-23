@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { getMovies } from '../actions/movieActions'
 
-const SearchMovie = () => {
+const SearchMovie = ({ getMovies }) => {
 
     const [movieName, setMoviename] = useState('');
     const [movieList, setMovieList] = useState([]);
+
+    useEffect(() => {
+        console.log("useEffect hook ran")
+        getMovies(movieName);
+    }, [getMovies, movieName])
 
     return (
         <>
@@ -18,4 +25,8 @@ const SearchMovie = () => {
     )
 }
 
-export default SearchMovie
+const mapStateToProps = state => ({
+    movies: state.movieCollection.movies
+})
+
+export default connect(mapStateToProps, { getMovies })(SearchMovie)
