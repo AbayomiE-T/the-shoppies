@@ -9,7 +9,7 @@ export default function movieReducer(state = initialState, action) {
         case GET_MOVIES:
             return {
                 ...state,
-                movies: action.data
+                movies: action.data.Search
             }
         default:
             return state;

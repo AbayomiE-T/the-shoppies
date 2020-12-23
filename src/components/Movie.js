@@ -1,10 +1,10 @@
 import React from 'react'
 
-const Movie = () => {
+const Movie = ({ name, year }) => {
     return (
-        <div>
-
-        </div>
+        <li>
+            {name} ({year})
+        </li>
     )
 }
 
