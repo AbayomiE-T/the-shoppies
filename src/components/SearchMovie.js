@@ -15,8 +15,9 @@ const SearchMovie = ({ getMovies, movies }) => {
         if (nominationList.length + 1 > 5)
             popup.current.classList.toggle("active");
 
-        else
-            setNominationList([...nominationList, movie])
+        else {
+            setNominationList([...nominationList, movie]);
+        }
 
     }
 
@@ -26,16 +27,28 @@ const SearchMovie = ({ getMovies, movies }) => {
         })
 
         setNominationList(newList);
+        localStorage.setItem('nominations', JSON.stringify(newList));
     }
 
     useEffect(() => {
         getMovies(movieName);
+
+        const nominations = localStorage.getItem('nominations');
+
+        if (nominations) {
+            setNominationList(JSON.parse(nominations));
+        }
+
     }, [getMovies, movieName])
 
 
     useEffect(() => {
         setMovieList(movies);
     }, [movies])
+
+    useEffect(() => {
+        localStorage.setItem('nominations', JSON.stringify(nominationList));
+    }, [nominationList])
 
     const movieArray = movieList ? movieList.map(movie => {
         return (<Movie name={movie.Title}
