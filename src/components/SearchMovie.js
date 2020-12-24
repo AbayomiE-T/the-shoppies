@@ -20,6 +20,14 @@ const SearchMovie = ({ getMovies, movies }) => {
 
     }
 
+    const deleteNomination = (movie) => {
+        const newList = nominationList.filter((currMovie) => {
+            return currMovie.name !== movie.name
+        })
+
+        setNominationList(newList);
+    }
+
     useEffect(() => {
         getMovies(movieName);
     }, [getMovies, movieName])
@@ -66,6 +74,7 @@ const SearchMovie = ({ getMovies, movies }) => {
                             return (<Movie name={nomination.name}
                                 year={nomination.year}
                                 poster={nomination.poster}
+                                deleteNomination={deleteNomination}
                                 btnText="Remove"
                                 key={nomination.id} />)
                         })}

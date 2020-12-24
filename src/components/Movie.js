@@ -1,12 +1,17 @@
 import React, { useRef } from 'react'
 
-const Movie = ({ name, year, poster, addToNomination, id, btnText }) => {
+const Movie = ({ name, year, poster, addToNomination, deleteNomination, id, btnText }) => {
 
     const buttonRef = useRef();
 
     const handleClick = (movie) => {
-        addToNomination(movie)
-        buttonRef.current.disabled = true;
+        if (btnText === "Nominate") {
+            addToNomination(movie);
+            buttonRef.current.disabled = true;
+        }
+
+        else
+            deleteNomination(movie);
     }
 
     return (
