@@ -13,5 +13,5 @@ In the project directory, you can run:
 This installs the missing dependencies needed to run the program
 
 ### `npm start`
-Runs the app in the development mode.
+Runs the app in development mode.
 Open http://localhost:3000 to view it in the browser.
