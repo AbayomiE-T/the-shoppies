@@ -7,5 +7,5 @@ export const getMovies = (movieName) => (dispatch) => {
         .then(data => dispatch({
             type: GET_MOVIES,
             data
-        }))
+        })).catch(err => console.log(err))
 }
