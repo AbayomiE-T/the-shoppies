@@ -22,6 +22,8 @@ body {
   width: 100%;
   background-image: url('./assets/movie-theatre.jpg');
   background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   filter: blur(3px);
 }
 
@@ -49,6 +51,7 @@ body {
   background-color: white;
   height: 50%;
   width: 50%;
+  z-index: 1;
 }
 
 label{
@@ -124,16 +127,63 @@ button{
 
 .popup{
   position: absolute;
-  top: 10%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgb(245, 66, 66);
-  padding: 2% 5%;
+  top: 0px;
+  height: 100%;
+  width: 100%;
   color: white;
+  /* opacity: 0; */
+}
+
+.overlay{
+ background-color: rgba(0,0,0,0.7);
+ position: absolute;
+ top: 0px;
+ height: 100%;
+ width: 100%;
+ display: none;
+}
+
+.popup-content{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 30%;
+  transform: translate(-50%,-50%);
+  width: 40%;
+  background-color: rgb(245, 69, 66);
   opacity: 0;
 }
 
-.popup.active{
-  opacity: 1;
-  transition: all 1s ease-out 0s;
+.popup h1{
+  text-align: center;
+  margin-top: 35px;
 }
+
+.popup p{
+  text-align: center;
+  margin-top: 50px;
+  font-weight: 300;
+}
+
+.close-btn{
+  cursor: pointer;
+  position: absolute;
+  top: 5px;
+  right: 20px;
+  font-size: 25px;
+}
+
+.popup.active{
+  z-index: 2;
+}
+
+.popup.active .overlay{
+  display: block;
+}
+
+.popup.active .popup-content{
+  opacity: 1;
+  transition:all 300ms ease-in-out;
+  /* transform:translate(-50%,-50%); */
+}
+

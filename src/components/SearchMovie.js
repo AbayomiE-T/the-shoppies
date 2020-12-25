@@ -2,18 +2,44 @@ import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { getMovies } from '../actions/movieActions'
 import Movie from './Movie';
+import PopupMessage from './PopupMessage';
 
 const SearchMovie = ({ getMovies, movies }) => {
 
     const [movieName, setMoviename] = useState('');
     const [movieList, setMovieList] = useState([]);
     const [nominationList, setNominationList] = useState([]);
+    const [popupMessage, setMessage] = useState('');
 
     const popup = useRef();
 
+    const movieExists = (movie) => {
+        for (let i = 0; i < nominationList.length; i++) {
+            if (nominationList[i].name === movie.name) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     const addToNomination = (movie) => {
-        if (nominationList.length + 1 > 5)
+
+        if (movieExists(movie)) {
+            setMessage("You cannot nominate a movie already in the list");
             popup.current.classList.toggle("active");
+        }
+
+        else if (nominationList.length >= 5) {
+            setMessage("You have reached your nomination limit! You can only nominate 5 movies and nothing over that.");
+            popup.current.classList.toggle("active");
+        }
+
+        else if (nominationList.length + 1 === 5) {
+            setMessage("You have reached your nomination limit! You can only nominate 5 movies and nothing over that.");
+            popup.current.classList.toggle("active");
+            setNominationList([...nominationList, movie]);
+        }
 
         else {
             setNominationList([...nominationList, movie]);
@@ -28,6 +54,10 @@ const SearchMovie = ({ getMovies, movies }) => {
 
         setNominationList(newList);
         localStorage.setItem('nominations', JSON.stringify(newList));
+    }
+
+    const handleClick = () => {
+        popup.current.classList.toggle("active");
     }
 
     useEffect(() => {
@@ -63,7 +93,12 @@ const SearchMovie = ({ getMovies, movies }) => {
     return (
         <>
             <div ref={popup} className="popup">
-                <p>You cannot have more than 5 movies in your nominations.</p>
+                <div className="overlay"></div>
+                <div className="popup-content">
+                    <div onClick={handleClick} className="close-btn">&times;</div>
+                    <h1>WARNING!</h1>
+                    <PopupMessage message={popupMessage} />
+                </div>
             </div>
             <h1 className="main-header">The Shoppies</h1>
             <div className="container">
