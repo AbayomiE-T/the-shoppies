@@ -201,12 +201,14 @@ button{
   .card{
     width: 80%;
   }
+
+  .popup-content{
+    height: 35%;
+    width: 80%;
+  }
 }
 
 @media only screen and (max-width: 300px){
-  .popup-content{
-    height: 40%;
-  }
 
   .main-header{
     font-size: 1.3rem;
